@@ -24,16 +24,37 @@ const Navigation: React.FC = () => {
       marginBottom: '0',
       boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
     }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center' }}>
-        <h2 style={{ color: 'white', margin: '0', marginRight: '32px' }}>
-          🐕 React 18 Performance Demo
-        </h2>
-        <Link to="/" style={linkStyle('/')}>
-          ⚠️ Unoptimized
-        </Link>
-        <Link to="/optimized" style={linkStyle('/optimized')}>
-          ✅ Optimized
-        </Link>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <h2 style={{ color: 'white', margin: '0', marginRight: '32px' }}>
+            🐕 React 18 Performance Demo
+          </h2>
+          <Link to="/" style={linkStyle('/')}>
+            ⚠️ Unoptimized
+          </Link>
+          <Link to="/optimized" style={linkStyle('/optimized')}>
+            ✅ Optimized
+          </Link>
+        </div>
+        <a 
+          href="https://github.com/SamOllason/react-performance-playground"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: 'white',
+            textDecoration: 'none',
+            padding: '8px 16px',
+            backgroundColor: '#24292e',
+            borderRadius: '4px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '14px'
+          }}
+        >
+          <span>📖</span>
+          <span>View README</span>
+        </a>
       </div>
     </nav>
   );
