@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { generateDog, Dog } from '../data/dogData';
 import { DogTableUnoptimized } from '../components/DogTableUnoptimized';
 import { InfoPanel } from '../components/InfoPanel';
