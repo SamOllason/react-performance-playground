@@ -2,6 +2,8 @@
 
 A fun, interactive learning tool demonstrating React 18 performance optimizations with dog-themed data!
 
+**[🎮 Try the Live Demo](https://samollason.github.io/react-performance-playground/)**
+
 > **Note:** This project uses React 18 to teach manual optimization techniques. React 19 introduces the React Compiler which can automate many of these patterns - see the [React 19 section](#-react-19-and-the-react-compiler) below for details.
 
 ## 🎯 What You'll Learn

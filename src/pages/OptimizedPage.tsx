@@ -6,13 +6,6 @@ import { ConsolePanel } from '../components/ConsolePanel';
 
 export const OptimizedPage: React.FC = () => {
   const [dogs, setDogs] = useState<Dog[]>([generateDog(), generateDog(), generateDog()]);
-  const renderCount = useRef(0);
-  const [, forceUpdate] = useState({});
-
-  // Increment render count without causing re-render
-  useEffect(() => {
-    renderCount.current += 1;
-  });
 
   const addDog = () => {
     setDogs([...dogs, generateDog()]);
