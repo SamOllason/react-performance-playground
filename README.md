@@ -1,6 +1,8 @@
-﻿# 🐕 React Performance Exploration
+﻿# 🐕 React 18 Performance Exploration
 
-A fun, interactive learning tool demonstrating React performance optimizations with dog-themed data!
+A fun, interactive learning tool demonstrating React 18 performance optimizations with dog-themed data!
+
+> **Note:** This project uses React 18 to teach manual optimization techniques. React 19 introduces the React Compiler which can automate many of these patterns - see the [React 19 section](#-react-19-and-the-react-compiler) below for details.
 
 ## 🎯 What You'll Learn
 
@@ -100,11 +102,83 @@ const handleSort = useCallback(() => {
 - **Vite** - Build tool and dev server
 - **React Router** - Navigation
 
+## 🆕 React 19 and the React Compiler
+
+**Note:** This project uses React 18 patterns to demonstrate manual optimization techniques. However, **React 19 introduces the React Compiler** which can automatically handle many of these optimizations for you!
+
+### How React 19 Changes the Game
+
+The **React Compiler** (formerly "React Forget") analyzes your code at build time and automatically adds optimizations where beneficial. This means you can write simpler code without manual memoization in many cases.
+
+### Side-by-Side Comparison
+
+#### **React.memo**
+```tsx
+// React 18 (Current - Manual)
+const DogRow = React.memo(({ dog, onSort }) => {
+  console.log(`🐕 Rendering row for ${dog.name}`);
+  return <tr>...</tr>;
+});
+
+// React 19 (With Compiler - Automatic)
+const DogRow = ({ dog, onSort }) => {
+  console.log(`🐕 Rendering row for ${dog.name}`);
+  return <tr>...</tr>;
+  // Compiler automatically prevents unnecessary re-renders
+};
+```
+
+#### **useMemo**
+```tsx
+// React 18 (Current - Manual)
+const sortedDogs = useMemo(() => 
+  dogs.sort((a, b) => a[sortKey].localeCompare(b[sortKey])),
+  [dogs, sortKey]
+);
+
+// React 19 (With Compiler - Automatic)
+const sortedDogs = dogs.sort((a, b) => 
+  a[sortKey].localeCompare(b[sortKey])
+);
+// Compiler determines if memoization is needed
+```
+
+#### **useCallback**
+```tsx
+// React 18 (Current - Manual)
+const handleSort = useCallback((key: string) => {
+  setSortKey(key);
+}, []);
+
+// React 19 (With Compiler - Automatic)
+const handleSort = (key: string) => {
+  setSortKey(key);
+};
+// Compiler stabilizes function references automatically
+```
+
+### Why Learn Manual Optimization Then?
+
+Even with the React Compiler, understanding these patterns is valuable:
+
+1. **Understanding React's Rendering Model** - Know how React works under the hood
+2. **Legacy Codebases** - Most existing React apps still use manual optimization
+3. **Fine-Tuned Control** - Complex scenarios may still need manual intervention
+4. **Debugging** - Understand performance issues when they arise
+5. **Gradual Adoption** - The compiler is opt-in and takes time to adopt
+
+### The Bottom Line
+
+- **React 19 Compiler** = Less boilerplate, cleaner code, automatic optimization
+- **Manual patterns** = Still valid, still work, still important to understand
+- **This project** = Great foundation for understanding both approaches!
+
 ## 📚 Learning Resources
 
 - [React.memo Documentation](https://react.dev/reference/react/memo)
 - [useMemo Hook](https://react.dev/reference/react/useMemo)
 - [useCallback Hook](https://react.dev/reference/react/useCallback)
+- [React 19 Compiler](https://react.dev/learn/react-compiler)
 
 ## 🎨 Project Structure
 
@@ -124,14 +198,14 @@ src/
 └── main.tsx                     # Entry point
 ```
 
-## 🔧 How Does the Console Simulation Work?
+## � How Does the Console Simulation Work?
 
 The `ConsolePanel` component provides a visual DevTools-like experience directly in the UI:
 
 ### Technical Implementation:
 
-1. **Console Method Interception**: 
-   - Overrides native `console.log`, `console.info`, `console.warn`, and `console.error`
+1. **Console Method Interception (Monkey-Patching)**: 
+   - Monkey-patches native `console.log`, `console.info`, `console.warn`, and `console.error` by temporarily replacing them with custom wrapper functions
    - Captures all arguments and stores them in React state
    - Still calls the original methods, so browser DevTools also receives the logs
 

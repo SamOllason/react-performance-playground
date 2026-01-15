@@ -7,13 +7,12 @@ interface DogTableOptimizedProps {
 }
 
 // ✅ OPTIMIZED: React.memo prevents this component from re-rendering 
-// unless its props (dog, onRemove, index) actually change
-const DogRow = React.memo<{ dog: Dog; onRemove: (id: number) => void; index: number }>(
-  ({ dog, onRemove, index }) => {
+// unless its props (dog, onRemove) actually change
+const DogRow = React.memo<{ dog: Dog; onRemove: (id: number) => void }>(({ dog, onRemove }) => {
     console.log(`✅ OPTIMIZED: DogRow ${dog.name} (ID: ${dog.id}) rendered`);
     
     return (
-      <tr style={{ backgroundColor: index % 2 === 0 ? '#f9f9f9' : 'white' }}>
+      <tr>
         <td style={{ padding: '12px', borderBottom: '1px solid #ddd' }}>
           <span style={{ fontSize: '24px', marginRight: '8px' }}>{dog.emoji}</span>
           {dog.name}
@@ -65,6 +64,7 @@ export const DogTableOptimized: React.FC<DogTableOptimizedProps> = ({ dogs, onRe
   }, [dogs, sortKey]);
 
   // ✅ OPTIMIZED: useCallback ensures this function reference stays stable
+  // because React uses referential equality to determine if props have changed.
   // This prevents DogRow components from re-rendering unnecessarily
   const handleSort = useCallback((key: keyof Dog) => {
     setSortKey(key);
@@ -98,8 +98,8 @@ export const DogTableOptimized: React.FC<DogTableOptimizedProps> = ({ dogs, onRe
           </tr>
         </thead>
         <tbody>
-          {sortedDogs.map((dog, index) => (
-            <DogRow key={dog.id} dog={dog} onRemove={handleRemove} index={index} />
+          {sortedDogs.map((dog) => (
+            <DogRow key={dog.id} dog={dog} onRemove={handleRemove} />
           ))}
         </tbody>
       </table>

@@ -27,17 +27,21 @@ export const ConsolePanel: React.FC<ConsolePanelProps> = ({ maxLogs = 50 }) => {
     // Override console methods to capture logs
     const addLog = (message: string, type: 'log' | 'info' | 'warn' | 'error') => {
       const timestamp = new Date().toLocaleTimeString();
-      setLogs(prev => {
-        const newLogs = [...prev, { 
-          id: logIdCounter.current++, 
-          message, 
-          timestamp, 
-          type 
-        }];
-        return newLogs.slice(-maxLogs); // Keep only last maxLogs entries
-      });
+      // Use setTimeout to defer state update until after render completes
+      setTimeout(() => {
+        setLogs(prev => {
+          const newLogs = [...prev, { 
+            id: logIdCounter.current++, 
+            message, 
+            timestamp, 
+            type 
+          }];
+          return newLogs.slice(-maxLogs); // Keep only last maxLogs entries
+        });
+      }, 0);
     };
 
+    // Monkey-patch console methods to intercept and capture logs for the UI
     console.log = (...args: any[]) => {
       originalLog(...args);
       addLog(args.map(arg => String(arg)).join(' '), 'log');

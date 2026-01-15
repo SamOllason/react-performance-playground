@@ -25,6 +25,17 @@ export const UnoptimizedPage: React.FC = () => {
   return (
     <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
       <h1 style={{ color: '#e74c3c' }}>🐕 Unoptimized Component (No Performance Optimization)</h1>
+      <div style={{
+        backgroundColor: '#fff3cd',
+        border: '1px solid #ffc107',
+        borderRadius: '4px',
+        padding: '12px 16px',
+        marginBottom: '16px',
+        fontSize: '14px',
+        color: '#856404'
+      }}>
+        📚 <strong>React 18 Learning Project:</strong> This demonstrates manual optimization techniques. React 19's compiler can automate many of these patterns!
+      </div>
       
       <InfoPanel 
         type="warning"
@@ -37,9 +48,7 @@ export const UnoptimizedPage: React.FC = () => {
       <InfoPanel 
         type="info"
         title="📊 What's Happening Here?"
-        description={`This page has NO performance optimizations. Every time state changes (adding/removing dogs, sorting), 
-        ALL components re-render. The sorting calculation runs on every render, and each row component re-renders even if its data hasn't changed. 
-        Page has rendered ${renderCount.current} times.`}
+        description="This page has NO performance optimizations. Every time state changes (adding/removing dogs, sorting), ALL components re-render. The sorting calculation runs on every render, and each row component re-renders even if its data hasn't changed."
       />
 
       <div style={{ marginBottom: '20px' }}>

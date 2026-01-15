@@ -26,7 +26,7 @@ const Navigation: React.FC = () => {
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center' }}>
         <h2 style={{ color: 'white', margin: '0', marginRight: '32px' }}>
-          🐕 React Performance Demo
+          🐕 React 18 Performance Demo
         </h2>
         <Link to="/" style={linkStyle('/')}>
           ⚠️ Unoptimized
@@ -41,7 +41,7 @@ const Navigation: React.FC = () => {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/react-performance-playground">
       <div style={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
         <Navigation />
         <Routes>
