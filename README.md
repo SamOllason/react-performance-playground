@@ -6,6 +6,35 @@ A fun, interactive learning tool demonstrating React 18 performance optimization
 
 > **Note:** This project uses React 18 to teach manual optimization techniques. React 19 introduces the React Compiler which can automate many of these patterns - see the [React 19 section](#-react-19-and-the-react-compiler) below for details.
 
+## 📸 See It In Action
+
+<div align="center">
+  <table>
+    <tr>
+      <td width="50%" align="center">
+        <img src="Screenshot-unoptimised.png" alt="Unoptimized page showing all dog rows re-rendering when sorting, with console logs indicating every row rendered" width="100%">
+        <br>
+        <strong>⚠️ Unoptimized</strong>
+        <br>
+        <em>All rows re-render on every change</em>
+      </td>
+      <td width="50%" align="center">
+        <img src="Screenshot-optimised.png" alt="Optimized page showing only necessary re-renders when sorting, with fewer console logs" width="100%">
+        <br>
+        <strong>✅ Optimized</strong>
+        <br>
+        <em>Only changed components re-render</em>
+      </td>
+    </tr>
+  </table>
+</div>
+
+**What you're seeing:**
+- **Left (Unoptimized)**: When sorting, every single dog row re-renders unnecessarily. The console shows render logs for all rows even though their data hasn't changed.
+- **Right (Optimized)**: With React.memo, useMemo, and useCallback applied, only the components that actually need to update will re-render. Notice the significantly fewer console logs!
+
+This visual comparison makes it easy to understand the performance impact of proper React optimization techniques.
+
 ## 🎯 What You'll Learn
 
 This mini portfolio project showcases the differences between optimized and unoptimized React components:
